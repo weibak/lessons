@@ -4,3 +4,10 @@
 Написать программу в виде трех функций.
 """
 
+
+def my_func(func_type, *args):
+        result = 0
+        for x in args:
+            result += x
+        return result
+print(my_func())
