@@ -24,6 +24,7 @@ def three_args(*numbers):
         print(my_string_03)
     elif var_03 == None:
         my_string_04 = f"Var1 = , {var_01} , Var2 = {var_02}"
+        print(my_string_04)
     else:
         print("Что-то пошло не так!")
 
