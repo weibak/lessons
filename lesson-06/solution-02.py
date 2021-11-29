@@ -22,7 +22,7 @@ if all_of_students % 2 == 0:
     result = all_of_students // 2
     print(result)
 elif all_of_students % 2:
-    result = (all_of_students //2) + 1
+    result = (all_of_students // 2) + 1
     print(result)
 else:
     print("Что-то пошло не так!")
