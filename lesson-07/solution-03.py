@@ -63,7 +63,7 @@ def get_products_stats(data: list) -> dict:
 та же функция только в образе generic функции. Два условия в одном
 
 def get_stats(data: list, index: int = 0) -> dict:
-    """ Generate list of users """
+    """"""Generate list of users
     result = {}
     for row in data:
         # If we already found user previously, aggregate new values
