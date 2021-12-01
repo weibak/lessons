@@ -59,7 +59,25 @@ def get_products_stats(data: list) -> dict:
                 "total_price": row[3],
             }
     return result
+"""
+та же функция только в образе generic функции. Два условия в одном
 
+def get_stats(data: list, index: int = 0) -> dict:
+    """ Generate list of users """
+    result = {}
+    for row in data:
+        # If we already found user previously, aggregate new values
+        if row[index] in result:
+            result[row[index]]["products_bought"] += row[2]
+            result[row[index]]["total_price"] += row[3]
+        else:
+            # Otherwise set initial values
+            result[row[index]] = {
+                "products_bought": row[2],
+                "total_price": row[3],
+            }
+    return result
+"""
 
 def main():
     """Main program function to get user's input and return result."""
