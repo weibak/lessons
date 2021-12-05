@@ -16,12 +16,9 @@ for ltr in new_word_list:
     if foundcont > maxcnt:
         maxcnt = foundcont
         theltr = ltrfoud
-print('Наиболее часто повторяющееся: '  + theltr)
+print('Наиболее часто повторяющееся: ' + theltr)
 
 
-"""maxlong = max(word_list)
-print('Самое длинное слово', maxlong)
-"""
 longword = []
 for i in word_list:
         longword.append(len(i))

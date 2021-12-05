@@ -3,13 +3,13 @@
 """
 
 
-   money = 2130
-   period = 5
-   tax = 0.1
-   bonus = 120
-   
-   while period > 0
-       money += money*tax + bonus
-       period -= 1
-   
-   print(money)
+money = 2130
+period = 5
+tax = 0.1
+bonus = 120
+
+while period > 0:
+    money += money*tax + bonus
+    period -= 1
+
+    print(money)
