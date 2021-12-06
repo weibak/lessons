@@ -15,6 +15,7 @@ while Y <= X:
     Y *= plus
     result.append(Y)
 
-days = len(result) + 1
-print(days)
-print(result)
+if __name__ == "__main__":
+    days = len(result) + 1
+    print(days)
+    print(result)

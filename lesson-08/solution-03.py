@@ -33,5 +33,7 @@ def hanoi(height, fromePole, toPole, withPole):
 def move_disk(fp, tp):
     print("Перемещение диска с ",fp,"на ",tp)
 
-n = int(input("Введите количество дисков: "))
-hanoi(n, "A", "B", "C")
+
+if __name__ == "__main__":
+    n = int(input("Введите количество дисков: "))
+    hanoi(n, "A", "B", "C")

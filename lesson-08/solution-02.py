@@ -21,5 +21,6 @@ while element != 0:
     element = int(input("Insert elements: "))
 max_reply = max(max_reply, curr_reply)
 
-print(previosly)
-print(max_reply)
+if __name__ == "__main__":
+    print(previosly)
+    print(max_reply)
