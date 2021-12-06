@@ -23,10 +23,10 @@ def hanoi (n, first = 1, last = 3):
 count = int(input("Введите количество дисков: "))
 hanoi(count)
 """
-
+"""
 def hanoi(height, fromePole, toPole, withPole):
     if height >= 1:
-        hanoi(height -1, fromePole, withPole, toPole)
+        hanoi(height - 1, fromePole, withPole, toPole)
         move_disk(fromePole, toPole)
         hanoi(height - 1, withPole, toPole, fromePole)
 
@@ -35,9 +35,9 @@ def move_disk(fp, tp):
 
 
 if __name__ == "__main__":
-    n = int(input("Введите количество дисков: "))
-    hanoi(n, "A", "B", "C")
-
+#    n = int(input("Введите количество дисков: "))
+    hanoi(4, "A", "B", "C")
+"""
 """
 Головоломка “Ханойские башни” состоит из трех стержней, пронумерованных числами 1, 2, 3. На стержень 1 надета пирамидка
 из n дисков различного диаметра в порядке возрастания диаметра. Диски можно перекладывать с одного стержня на другой
