@@ -14,7 +14,7 @@ print(square)
 """
 
 
-from figures import Point, Circle, Triangle, Square
+from solution_01 import Point, Circle, Triangle, Square
 
 
 def main():
