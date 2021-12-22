@@ -48,7 +48,7 @@ def search_product(query: str):
             FROM products 
             WHERE name = ?;
             """,
-            (query,),
+            (query,)
         )
         session.commit()
         return cursor.fetchall()
@@ -95,6 +95,7 @@ def delete_product(query: str):
         )
         session.commit()
 
+
 if __name__ == "__main__":
     #create_products_table()
     #create_product("Milk", 2, 5, "I need More Milk")
@@ -107,6 +108,7 @@ if __name__ == "__main__":
     #print(search_product_price(from1, to))
     #update_product(3, "Milk replace cheese")
     #delete_product("Don't Need")
+
 
     choise = input("What operation do you want to do: ")
     if choise == "create":
@@ -124,13 +126,13 @@ if __name__ == "__main__":
         to = int(input("Search price to: "))
         print(search_product_price(from1, to))
     elif choise == "update":
-        id = int(input("Insert your ID: "))
+        idd = int(input("Insert your ID: "))
         comment = input("What name you want to update: ")
-        update_product(id, comment)
+        update_product(idd, comment)
         print("Well done update!")
     elif choise == "delete":
-        query = input("Product with which comment would you like to delete: ")
-        delete_product(query)
+        queryy = input("Product with which comment would you like to delete: ")
+        delete_product(queryy)
         print("Product removed")
     else:
         print("Something wrong!")
