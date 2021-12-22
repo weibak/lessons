@@ -27,7 +27,7 @@ def create_user_table():
 
 
 def create_user(firstname: str, lastname: str, email: str, password: str, age: int):
-   with sqlite3.connect("db.sqlite3") as session:
+    with sqlite3.connect("db.sqlite3") as session:
         cursor = session.cursor()
         cursor.execute(
             """
@@ -40,7 +40,7 @@ def create_user(firstname: str, lastname: str, email: str, password: str, age: i
 
 
 def search_user(query: str):
-   with sqlite3.connect("db.sqlite3") as session:
+    with sqlite3.connect("db.sqlite3") as session:
         cursor = session.cursor()
         cursor.execute(
             """
@@ -78,3 +78,13 @@ if __name__ == "__main__":
     print(search_user("ARTEM"))
     print(search_user("Anastasia"))
     print(search_user_age(17, 23))
+
+    search = int(input("1 если хотите искать по возрасту, 2 усли хотите искать по имени: "))
+    if search == 1:
+        from1 = int(input("Введите возраст от: "))
+        to = int(input("Введите возраст до: "))
+        print(search_user_age(from1, to))
+    elif search == 2:
+        print(search_user(input("Введите имя: ")))
+    else:
+        print("ERROR")
