@@ -25,8 +25,11 @@ def create_user_table():
         session.commit()
 
 
-
-def create_user(firstname: str, lastname: str, email: str, password: str, age: int):
+def create_user(firstname: str,
+                lastname: str,
+                email: str,
+                password: str,
+                age: int):
     with sqlite3.connect("db.sqlite3") as session:
         cursor = session.cursor()
         cursor.execute(
@@ -48,14 +51,14 @@ def search_user(query: str):
             FROM user 
             WHERE firstname = ?;
             """,
-            (query,), #запятая специально, чтобы показать что один элемент
+            (query,),  # запятая специально, чтобы показать что один элемент
         )
         session.commit()
         return cursor.fetchall()
 
 
 def search_user_age(from1: int, to: int):
-   with sqlite3.connect("db.sqlite3") as session:
+    with sqlite3.connect("db.sqlite3") as session:
         cursor = session.cursor()
         cursor.execute(
             """
