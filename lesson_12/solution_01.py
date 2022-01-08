@@ -57,7 +57,6 @@ class Purchase(Base):
     __tablename__ = "purchases"
     id = Column(Integer, primary_key=True)
     id_usr = Column(Integer, ForeignKey("user.id"), nullable=False)
-    price = Column(Integer)
     id_prod = Column(Integer, ForeignKey("product.id"), nullable=False)
     quantity = Column(Integer)
     date_of_purchase = Column(DateTime(), default=datetime.now())
@@ -82,24 +81,15 @@ def create_product(name_prod: str, price: int):
     return print("Product successfully added!")
 
 
-def create_purchase(name_prod, ):
-    # Создание объектов покупок и добавление их в сессию
-    print()
-    by = input("What product you want to by? ")
+def create_purchase(choice, quan):
+    user_id = session.query(User.id).one()
 
-    purchase = Purchase(id_usr=name_usr)
-    user_name = Column(String, ForeignKey("user.name"))
-    user = relationship("User", back_populates="purchases")
-    price = Column(Integer)
-    product_name = Column(String, ForeignKey("products.name"))
-    product = relationship("Product", back_populates="purchases")
-    quantity = Column(Integer)
-    date_of_purchase = Column(DateTime, default=datetime.date)
-    products = Product(name=name_prod, price=price)
+    purchase = Purchase(id_usr=user_id, id_prod=choice, quantity=quan)
+
     session.add(purchase)
-
     # Отправка данных в БД
     session.commit()
+    return print("You by this product!")
 
 
 if __name__ == "__main__":
@@ -111,19 +101,36 @@ if __name__ == "__main__":
     if not database_exists(engine.url):
         # Создание БД
         create_database(engine.url)
-
     # Создание таблиц в БД для всех классов/моделей
     Base.metadata.create_all(engine)
     # Создание новой сессии для добавления/удаления записей
     Session = sessionmaker(bind=engine)
     session = Session()
 
+    email = input("Insert your email: ")
+    user = session.query(User).all()
+    for email in user:
+        if email in user:
+            qus = input("You want to buy or add product?(Buy/Add) ")
+            if qus == "Buy":
+                prod = session.query(Product.id, Product.name, Product.price)
+                prods = prod.all()
+                for product in prods:
+                    print(
+                        f"Product number: {product[0]}, product name: {product[1]}, product price: {product[2]}"
+                    )
+                choice = int(input("Enter number of product, what you want buy: "))
+                quan = int(input("Enter how many pieces you want to buy:  "))
+                # user_id = session.query(User.id).one()
+                # create_purchase(choice, quan)
+                buy = Purchase(id_usr=user.id, id_prod=choice, quantity=quan)
 
-#name_usr = input("Insert your Name: ")
-#email = input("Insert your email: ")
-#name_prod = input("Insert product Name: ")
-#price = int(input("Insert price of product: "))
-#create_user(name_usr, email)
-#create_product(name_prod, price)
+
+
+
+# name_prod = input("Insert product Name: ")
+# price = int(input("Insert price of product: "))
+# create_user("aaaa", "@com")
+# create_product(name_prod, price)
 
 
