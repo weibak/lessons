@@ -82,7 +82,11 @@ def create_product(name_prod: str, price: int):
 
 
 def create_purchase(choice, quan):
-    user_id = session.query(User.id).one()
+    email = session.query(User.id, User.email,).outerjoin(input("insert email"), full=True)#filter(User.id == input("Insert email: "))
+    #idd = session.query(User.id)
+
+    #iddd = user.id[0]
+    user_id = session.query(User).filter(User.id == email)
 
     purchase = Purchase(id_usr=user_id, id_prod=choice, quantity=quan)
 
@@ -108,9 +112,9 @@ if __name__ == "__main__":
     session = Session()
 
     email = input("Insert your email: ")
-    user = session.query(User).all()
+    user = session.query(User.email).filter(User.email == email).one()
     for email in user:
-        if email in user:
+        if email == user.email:
             qus = input("You want to buy or add product?(Buy/Add) ")
             if qus == "Buy":
                 prod = session.query(Product.id, Product.name, Product.price)
@@ -122,15 +126,42 @@ if __name__ == "__main__":
                 choice = int(input("Enter number of product, what you want buy: "))
                 quan = int(input("Enter how many pieces you want to buy:  "))
                 # user_id = session.query(User.id).one()
-                # create_purchase(choice, quan)
-                buy = Purchase(id_usr=user.id, id_prod=choice, quantity=quan)
+                create_purchase(choice, quan)
+                #buy = Purchase(id_usr=user.id, id_prod=choice, quantity=quan)
+            if qus == "Add":
+                prod = input("Enter name of product: ")
+                price = int(input("Enter price of product: "))
+                create_product(prod, price)
+                break
+        if email != user.email:
+            qus2 = input("Do you wont to register? (Yes/NO) ")
+            if qus2 == "Yes":
+                name_usr = input("Enter your name: ")
+                email = input("Enter your email: ")
+                create_user(name_usr, email)
+                break
+            if qus2 == "No":
+                break
 
+
+"""
+
+        if email != user:
+            qus2 = input("Do you wont to register? (Yes/NO) ")
+            if qus2 == "Yes":
+                name_usr = input("Enter your name: ")
+                email = input("Enter your email: ")
+                create_user(name_usr, email)
+
+            if qus2 == "No":
+                continue
+"""
 
 
 
 # name_prod = input("Insert product Name: ")
 # price = int(input("Insert price of product: "))
-# create_user("aaaa", "@com")
+#create_user("aaaa", "@com")
 # create_product(name_prod, price)
 
 
