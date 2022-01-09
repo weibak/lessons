@@ -81,19 +81,39 @@ def create_product(name_prod: str, price: int):
     return print("Product successfully added!")
 
 
-def create_purchase(choice, quan):
-    email = session.query(User.id, User.email,).outerjoin(input("insert email"), full=True)#filter(User.id == input("Insert email: "))
-    #idd = session.query(User.id)
+def create_purchase(choice, quan, email):
+    q = session.query(User.id, User.email).all()
+    e = email
 
-    #iddd = user.id[0]
-    user_id = session.query(User).filter(User.id == email)
+    def get_key(q, value):
+        for k, v in q:
+            if v == value:
+                return k
 
+    user_id = get_key(q, e)
     purchase = Purchase(id_usr=user_id, id_prod=choice, quantity=quan)
-
     session.add(purchase)
     # Отправка данных в БД
     session.commit()
     return print("You by this product!")
+
+
+""" еще одна попытка из миллиона
+    #for u in q: #A цикл для вычисленяи айди равный почте
+        #b = {u.email: u.id} # словарь для нахождения айди, через ключ-значение
+        #print(b)
+
+        #user_id = b.get(e)
+        #print(user_id)
+        #result = user_id
+        #return print(result)
+    #print(user_id)
+    одна из миллиона попыток вынять фйди юзера
+    usrid = (user.id, user.email)
+    print(usremail, usrid)
+    mail = input("Email: ")
+    iddd = user.id[0]
+    user_id = session.query(User).filter(User.id == email)"""
 
 
 if __name__ == "__main__":
@@ -112,9 +132,13 @@ if __name__ == "__main__":
     session = Session()
 
     email = input("Insert your email: ")
-    user = session.query(User.email).filter(User.email == email).one()
-    for email in user:
-        if email == user.email:
+    user = session.query(User.email).filter(User.email == email).first()
+    users = session.query(User.email).all()
+    print(user)
+    #print(users)
+    for user in users:
+        if email == user:
+            print(email)
             qus = input("You want to buy or add product?(Buy/Add) ")
             if qus == "Buy":
                 prod = session.query(Product.id, Product.name, Product.price)
@@ -126,15 +150,16 @@ if __name__ == "__main__":
                 choice = int(input("Enter number of product, what you want buy: "))
                 quan = int(input("Enter how many pieces you want to buy:  "))
                 # user_id = session.query(User.id).one()
-                create_purchase(choice, quan)
+                #email = input("email: ")
+                create_purchase(choice, quan, email)
                 #buy = Purchase(id_usr=user.id, id_prod=choice, quantity=quan)
             if qus == "Add":
                 prod = input("Enter name of product: ")
                 price = int(input("Enter price of product: "))
                 create_product(prod, price)
                 break
-        if email != user.email:
-            qus2 = input("Do you wont to register? (Yes/NO) ")
+        if email not in users:
+            qus2 = input("Do you wont to register? (Yes/No) ")
             if qus2 == "Yes":
                 name_usr = input("Enter your name: ")
                 email = input("Enter your email: ")
@@ -142,10 +167,10 @@ if __name__ == "__main__":
                 break
             if qus2 == "No":
                 break
-
+            else:
+                break
 
 """
-
         if email != user:
             qus2 = input("Do you wont to register? (Yes/NO) ")
             if qus2 == "Yes":
