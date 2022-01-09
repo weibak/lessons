@@ -136,8 +136,8 @@ if __name__ == "__main__":
     users = session.query(User.email).all()
     print(user)
     #print(users)
-    for user in users:
-        if email == user:
+    for email in user:
+        if email == user.email:
             print(email)
             qus = input("You want to buy or add product?(Buy/Add) ")
             if qus == "Buy":
