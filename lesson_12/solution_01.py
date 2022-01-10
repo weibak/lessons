@@ -131,43 +131,46 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
+    # при back_populates
+    # user = session.query(User).filter_by(email="@com").first()
+    # print(p.product.name for p in user.purchases)
+
     email = input("Insert your email: ")
     user = session.query(User.email).filter(User.email == email).first()
     users = session.query(User.email).all()
-    print(user)
-    for email in user:
-        if email == user.email:
-            print(email)
-            qus = input("You want to buy or add product?(Buy/Add) ")
-            if qus == "Buy":
-                prod = session.query(Product.id, Product.name, Product.price)
-                prods = prod.all()
-                for product in prods:
-                    print(
-                        f"Product number: {product[0]}, product name: {product[1]}, product price: {product[2]}"
-                    )
-                choice = int(input("Enter number of product, what you want buy: "))
-                quan = int(input("Enter how many pieces you want to buy:  "))
-                # user_id = session.query(User.id).one()
-                # email = input("email: ")
-                create_purchase(choice, quan, email)
-                # buy = Purchase(id_usr=user.id, id_prod=choice, quantity=quan)
-            if qus == "Add":
-                prod = input("Enter name of product: ")
-                price = int(input("Enter price of product: "))
-                create_product(prod, price)
-                break
-        if email not in users:
-            qus2 = input("Do you wont to register? (Yes/No) ")
-            if qus2 == "Yes":
-                name_usr = input("Enter your name: ")
-                email = input("Enter your email: ")
-                create_user(name_usr, email)
-                break
-            if qus2 == "No":
-                break
-            else:
-                break
+    if user is not None:
+        qus = input("You want to buy or add product?(Buy/Add) ")
+        if qus == "Buy":
+            prod = session.query(Product.id, Product.name, Product.price)
+            prods = prod.all()
+            for product in prods:
+                print(
+                    f"Product number: {product[0]}, product name: {product[1]}, product price: {product[2]}"
+                )
+            choice = int(input("Enter number of product, what you want buy: "))
+            quan = int(input("Enter how many pieces you want to buy:  "))
+            # user_id = session.query(User.id).one()
+            # email = input("email: ")
+            create_purchase(choice, quan, email)
+            # buy = Purchase(id_usr=user.id, id_prod=choice, quantity=quan)
+        if qus == "Add":
+            prod = input("Enter name of product: ")
+            price = int(input("Enter price of product: "))
+            create_product(prod, price)
+            exit()
+    if user is None:
+        qus2 = input("Do you wont to register? (Yes/No) ")
+        if qus2 == "Yes":
+            name_usr = input("Enter your name: ")
+            email = input("Enter your email: ")
+            create_user(name_usr, email)
+            exit()
+        if qus2 == "No":
+            exit()
+        else:
+            exit()
+
+
 
 """
         if email != user:
