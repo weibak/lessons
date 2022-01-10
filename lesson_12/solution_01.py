@@ -135,7 +135,6 @@ if __name__ == "__main__":
     user = session.query(User.email).filter(User.email == email).first()
     users = session.query(User.email).all()
     print(user)
-    #print(users)
     for email in user:
         if email == user.email:
             print(email)
@@ -150,9 +149,9 @@ if __name__ == "__main__":
                 choice = int(input("Enter number of product, what you want buy: "))
                 quan = int(input("Enter how many pieces you want to buy:  "))
                 # user_id = session.query(User.id).one()
-                #email = input("email: ")
+                # email = input("email: ")
                 create_purchase(choice, quan, email)
-                #buy = Purchase(id_usr=user.id, id_prod=choice, quantity=quan)
+                # buy = Purchase(id_usr=user.id, id_prod=choice, quantity=quan)
             if qus == "Add":
                 prod = input("Enter name of product: ")
                 price = int(input("Enter price of product: "))
